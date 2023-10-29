@@ -1,0 +1,225 @@
+body {
+    background: url("images/assets/background.png") no-repeat center center fixed;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo, .test_box, .prime-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
+    background: transparent url('images/assets/logo.png') 0% 0% no-repeat padding-box;
+    opacity: 1;
+    height: 76px;
+    background: transparent url('images/assets/logo.png') 0% 0% no-repeat padding-box;
+}
+
+.test_box {
+    height: 96px;
+    width: 470px;
+    background: url('images/assets/teszt feladat rectangle.png') 0% 0% no-repeat padding-box;
+    border: 2px dashed #707070;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.test_text {
+    width: 274px;
+    height: 53px;
+    background-image: url('images/assets/TESZT FELADAT.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #707070;
+    opacity: 1;
+}
+
+.prime-form {
+    height: 487px;
+    background: #fff;
+    box-shadow: 7px 15px 5px #00000080;
+    padding: 20px;
+    border-radius: 10px;
+}
+.how_much {
+    position: relative;
+    text-align: left;
+    letter-spacing: 0px;
+    color: hsla(210, 29%, 28%, 1);
+    opacity: 1;
+}
+
+
+.input-container {
+    top: 350px;
+    left: 800px;
+    width: 284px;
+    height: 80px;
+    background: #33485D 0% 0% no-repeat padding-box;
+    opacity: 1;
+    position: absolute;
+    padding-right: 10px;
+}
+
+
+.input-text {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    text-align: right;
+    font-size: 24px;
+    color: hsla(0, 0%, 100%, 1);
+    border: none;
+    outline: none;
+}
+.input-text::placeholder {
+    font-size: 24px;
+    text-align: right;
+    opacity: 1;
+    top: 419dp;
+    left: 1061dp;
+    width: 54dp;
+    height: 67dp;
+    letter-spacing: 0dp;
+    color: hsla(0, 0%, 100%, 1);
+    opacity: 1;
+}
+
+
+.number_end {
+    top: 480px;
+    left: 660px !important;
+    width: 318px;
+    height: 23px;
+    text-align: left;
+    letter-spacing: 0px;
+    color: hsla(210, 29%, 28%, 1);
+    opacity: 1;
+    position: absolute;
+}
+
+
+.choose_number {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    text-indent: 200px;
+    font-size: 24px;
+    color: hsla(0, 0%, 100%, 1);
+    border: none;
+    outline: none;
+}
+
+.choose_number::placeholder {
+    top: 564px;
+    left: 1013px;
+    width: 27px;
+    height: 67px;
+    opacity: 1;
+    letter-spacing: 0px;
+    color: hsla(0, 0%, 100%, 1);
+}
+
+.choose {
+    top: 520px;
+    left: 800px;
+    width: 284px;
+    height: 80px;
+    position: relative;
+    text-align: center;
+    background: #33485D 0% 0% no-repeat padding-box;
+    opacity: 1;
+    position: absolute;
+    padding-right: 10px;
+}
+
+.custom-select {
+    width: 100%;
+    height: 100%;
+    background: url('images/assets/ezzel\ vegzodik\ rectangle\ blue.png') no-repeat right center;
+    background-size: auto 67px; 
+    position: relative;
+    border: none;
+}
+.custom-select select {
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.custom-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-button img {
+    top: 700px;
+    left: 849px;
+    width: 222px;
+    margin: 0;
+    position: absolute;
+}
+
+.button-text {
+    top: 715px;
+    left: 849px;
+    width: 222px;
+    text-align: center;
+    letter-spacing: 0px;
+    color: #33485D;
+    opacity: 1;
+    margin-top: 10px;
+    position: absolute;
+}
+
+.result:hover {
+    background-color: #007bff;
+    color: #fff;
+    border: 2px solid #007bff;
+}
+
+
+
+    
+
+
+
+
+
+
