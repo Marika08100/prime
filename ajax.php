@@ -12,10 +12,10 @@ if (isset($_POST['numPrimes']) && isset($_POST['lastDigit'])) {
         }
         $i++;
         if (count($primes) > 0) {
-            $result = implode(', ', $primes);
-            echo json_encode(array('success' => true, 'result' => $result));
+            $results = implode(', ', $primes);
+            echo json_encode(array('success' => true, 'results' => $results));
         } else {
-            echo json_encode(array('success' => false, 'result' => 'Nincs eredmény.'));
+            echo json_encode(array('success' => false, 'results' => 'Nincs eredmény.'));
         }
     }
    

@@ -71,7 +71,7 @@
                 success: function (data) {
                     $('#loading').hide(); // Elrejtjük a betöltési üzenetet
                     if (data.success) {
-                        $('#results').html(data.result); // Az AJAX válaszban kapott eredmény megjelenítése
+                        $('#results').html(data.results); // Az AJAX válaszban kapott eredmény megjelenítése
                     } else {
                         $('#results').html('Nincs eredmény.'); // Nincs eredmény esetén üzenet megjelenítése
                     }
