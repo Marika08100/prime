@@ -1,14 +1,3 @@
-<?php
-if(empty($_POST == false)){
-    echo 'submitted';
-}
-?>
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -25,13 +14,13 @@ if(empty($_POST == false)){
         <div class="test_text"></div>
     </div>
 
-    <form class="prime-form" id="prime-form" action="ajax.php" method="post">
+    <form class="prime-form" id="prime-form" action="" method="post" required >
         <div class="how_much">
             <img src="images/assets/ENNYI PRÍMSZÁMOT KÉREK.png" style="width: 216px; height: 23px;">
         </div>
 
         <div class="input-container">
-            <input class="input-text" type="text" placeholder="32" id="numPrimes">
+            <input class="input-text" type="text" placeholder="32" id="numPrimes" name="numPrimes">
         </div>
 
         <div class="number_end">
@@ -40,7 +29,7 @@ if(empty($_POST == false)){
 
         <div class="choose">
             <div class="custom-select">
-                <select class="choose_number" id="lastDigit">
+                <select class="choose_number" id="lastDigit" name="lastDigit">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -56,7 +45,7 @@ if(empty($_POST == false)){
         </div>
 
         <div class="button-container">
-            <button class="custom-button" id="generate-button" method="Post">
+            <button class="custom-button" id="generate-button" type="submit">
                 <img src="images/assets/generalas rectangle yellow.png">
                 <span class="button-text">GENERÁLÁS</span>
             </button>
@@ -64,6 +53,38 @@ if(empty($_POST == false)){
     </form>
     <div id="loading" style="display: none;">Kérlek várj, eredmények generálása...</div>
     <div id="results"></div>
-  
+    <script>
+    $(document).ready(function () {
+        $('#prime-form').submit(function (event) {
+            event.preventDefault(); // Megakadályozzuk az űrlap alapértelmezett viselkedését (oldal frissítése)
+
+            var numPrimes = $('#numPrimes').val();
+            var lastDigit = $('#lastDigit').val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'ajax.php', // A PHP fájl neve
+                data: { numPrimes: numPrimes, lastDigit: lastDigit },
+                beforeSend: function () {
+                    $('#loading').show(); // Megjelenítjük a betöltési üzenetet
+                },
+                success: function (data) {
+                    $('#loading').hide(); // Elrejtjük a betöltési üzenetet
+                    if (data.success) {
+                        $('#results').html(data.result); // Az AJAX válaszban kapott eredmény megjelenítése
+                    } else {
+                        $('#results').html('Nincs eredmény.'); // Nincs eredmény esetén üzenet megjelenítése
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('AJAX hiba:', errorThrown);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
 </body>
 </html>

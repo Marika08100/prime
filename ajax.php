@@ -7,14 +7,19 @@ if (isset($_POST['numPrimes']) && isset($_POST['lastDigit'])) {
     $i = 2;
 
     while (count($primes) < $numPrimes) {
-        if ($i % 10 == $lastDigit && isPrime($i)) {
+        if (($i % 10 == $lastDigit || $lastDigit == 0) && isPrime($i)) {
             $primes[] = $i;
         }
         $i++;
+        if (count($primes) > 0) {
+            $result = implode(', ', $primes);
+            echo json_encode(array('success' => true, 'result' => $result));
+        } else {
+            echo json_encode(array('success' => false, 'result' => 'Nincs eredmény.'));
+        }
     }
-
-    $result = implode(', ', $primes); // Eredmények stringgé alakítása, vesszővel elválasztva
-    echo $result;
+   
+   
 }
 
 function isPrime($num) {
