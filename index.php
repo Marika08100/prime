@@ -52,36 +52,42 @@
         </div>
     </form>
     <div id="loading" style="display: none;">Kérlek várj, eredmények generálása...</div>
-    <div id="results"></div>
+
+    <div id="result-container"></div>
+
+
+</div>
+</div>
+</div>
+
     <script>
-    $(document).ready(function () {
-        $('#prime-form').submit(function (event) {
-            event.preventDefault(); // Megakadályozzuk az űrlap alapértelmezett viselkedését (oldal frissítése)
+$(document).ready(function () {
+    $('#prime-form').submit(function (event) {
+        event.preventDefault(); // Megakadályozzuk az űrlap alapértelmezett viselkedését (oldal frissítése)
 
-            var numPrimes = $('#numPrimes').val();
-            var lastDigit = $('#lastDigit').val();
+        var numPrimes = $('#numPrimes').val();
+        var lastDigit = $('#lastDigit').val();
 
-            $.ajax({
-                type: 'POST',
-                url: 'ajax.php', // A PHP fájl neve
-                data: { numPrimes: numPrimes, lastDigit: lastDigit },
-                beforeSend: function () {
-                    $('#loading').show(); // Megjelenítjük a betöltési üzenetet
-                },
-                success: function (data) {
-                    $('#loading').hide(); // Elrejtjük a betöltési üzenetet
-                    if (data.success) {
-                        $('#results').html(data.results); // Az AJAX válaszban kapott eredmény megjelenítése
-                    } else {
-                        $('#results').html('Nincs eredmény.'); // Nincs eredmény esetén üzenet megjelenítése
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('AJAX hiba:', errorThrown);
-                }
-            });
+        $.ajax({
+            type: 'POST',
+            url: 'ajax.php', // A PHP fájl neve
+            data: { numPrimes: numPrimes, lastDigit: lastDigit },
+            beforeSend: function () {
+                $('#loading').show(); // Megjelenítjük a betöltési üzenetet
+                $('#result-container').hide(); // Elrejtjük az eredmény téglalapot
+            },
+            success: function (data) {
+                $('#loading').hide(); // Elrejtjük a betöltési üzenetet
+                $('#result-container').show(); // Megjelenítjük az eredmény téglalapot
+                $('#result-container').html(data); // Az AJAX válaszban kapott eredményeket megjelenítjük az eredmény téglalapban
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('AJAX hiba:', errorThrown);
+            }
         });
     });
+});
+
 </script>
 
 </body>

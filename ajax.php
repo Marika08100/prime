@@ -1,37 +1,54 @@
 <?php
+
+function isPrime($n) {
+    if ($n <= 1) {
+        return false;
+    }
+    if ($n <= 3) {
+        return true;
+    }
+    if ($n % 2 == 0 || $n % 3 == 0) {
+        return false;
+    }
+    for ($i = 5; $i * $i <= $n; $i += 6) {
+        if ($n % $i == 0 || $n % ($i + 2) == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 if (isset($_POST['numPrimes']) && isset($_POST['lastDigit'])) {
     $numPrimes = intval($_POST['numPrimes']);
     $lastDigit = intval($_POST['lastDigit']);
 
-    $primes = array();
-    $i = 2;
+    $primeNumbers = [];
+    $number = 2; // A prímek generálását 2-től kezdjük
+    $primeCount = 0;
 
-    while (count($primes) < $numPrimes) {
-        if (($i % 10 == $lastDigit || $lastDigit == 0) && isPrime($i)) {
-            $primes[] = $i;
-        }
-        $i++;
-        if (count($primes) > 0) {
-            $results = implode(', ', $primes);
-            echo json_encode(array('success' => true, 'results' => $results));
-        } else {
-            echo json_encode(array('success' => false, 'results' => 'Nincs eredmény.'));
+    if ($lastDigit % 2 == 1 || $lastDigit == 2) {
+        while ($primeCount < $numPrimes) {
+            if (isPrime($number) && $number % 10 == $lastDigit) {
+                $primeNumbers[] = $number;
+                $primeCount++;
+
+                if ($lastDigit == 5 || $lastDigit == 2) {
+                    // Ha a kiválasztott számjegy 5 vagy páros, akkor csak páros prímszámokat keresünk
+                    break;
+                }
+            }
+            $number++;
         }
     }
-   
-   
-}
 
-function isPrime($num) {
-    if ($num <= 1) return false;
-    if ($num <= 3) return true;
-
-    if ($num % 2 == 0 || $num % 3 == 0) return false;
-
-    for ($i = 5; $i * $i <= $num; $i += 6) {
-        if ($num % $i == 0 || $num % ($i + 2) == 0) return false;
+    if (empty($primeNumbers)) {
+        echo "Nincs eredmény a kiválasztott feltételek alapján.";
+    } else {
+        echo "A keresett prímszámok:\n";
+        foreach ($primeNumbers as $prime) {
+            echo $prime . "\n";
+        }
     }
-
-    return true;
 }
+
 ?>
