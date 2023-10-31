@@ -77,6 +77,11 @@
                         $('#loading').show();
                         $('#result-container').hide();
                         $('#result-container').empty();
+
+                        // Az üzenet megjelenítése késleltetve
+                        setTimeout(function() {
+                            $('#loading').text('Kérlek várj, eredmények generálása...');
+                        }, 2000);
                     },
                     success: function(data) {
                         $('#loading').hide();
@@ -90,13 +95,13 @@
 
                             // Az eredményekre hover és click eseményfigyelők hozzáadása
                             $('.result-number').hover(function() {
-                                $(this).css('background-color', '#FFA500'); // Hover állapotban megváltozott háttérszín
-                                $(this).css('border-color', '#FF0000'); // Hover állapotban megváltozott keretszín
+                                $(this).css('background-color', '#FFA500');
+                                $(this).css('border-color', '#FF0000');
                             }, function() {
-                                $(this).css('background-color', '#33485D'); // Visszaállítjuk a háttérszínt a normál állapotra
-                                $(this).css('border-color', '#000'); // Visszaállítjuk a keretszínt a normál állapotra
+                                $(this).css('background-color', '#33485D');
+                                $(this).css('border-color', '#000');
                             }).click(function() {
-                                $('.result-number').not(this).hide(); // Az összes többi eredmény elrejtése, kivéve a kattintottat
+                                $('.result-number').not(this).hide();
                             });
                         } else {
                             $('#result-container').html('<div class="no-result-message" style="background-color: #33485D; color: #FFFFFF; padding: 10px;">Nincs eredmény a kiválasztott feltételek alapján.</div>');
@@ -109,6 +114,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>
