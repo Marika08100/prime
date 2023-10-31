@@ -230,17 +230,13 @@ body {
     left: 640px;
     width: 640px;
     height: 180px;
-    background: 0% 0% no-repeat padding-box url(images/assets/eredmenyek\ number\ rectangle.png);
+    background: url(images/assets/eredmenyek\ number\ rectangle.png) 
+    #E0E0E0 0% 0% no-repeat padding-box;
     box-shadow: 7px 15px 5px #00000080;
     opacity: 1;
-    overflow-y: auto; 
-    display: none; 
+    display: none;
+
+
 }
-
-    
-
-
-
-
 
 
