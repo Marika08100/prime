@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
     <div class="logo"></div>
 
@@ -14,7 +16,7 @@
         <div class="test_text"></div>
     </div>
 
-    <form class="prime-form" id="prime-form" action="" method="post" required >
+    <form class="prime-form" id="prime-form" action="" method="post" required>
         <div class="how_much">
             <img src="images/assets/ENNYI PRÍMSZÁMOT KÉREK.png" style="width: 216px; height: 23px;">
         </div>
@@ -55,42 +57,58 @@
 
     <div id="result-container"></div>
 
-
-</div>
-</div>
-</div>
-
     <script>
-$(document).ready(function () {
-    $('#prime-form').submit(function (event) {
-        event.preventDefault(); // Megakadályozzuk az űrlap alapértelmezett viselkedését (oldal frissítése)
+        $(document).ready(function() {
+            $('#prime-form').submit(function(event) {
+                event.preventDefault();
 
-        var numPrimes = $('#numPrimes').val();
-        var lastDigit = $('#lastDigit').val();
+                var numPrimes = $('#numPrimes').val();
+                var lastDigit = $('#lastDigit').val();
 
-        $.ajax({
-            type: 'POST',
-            url: 'ajax.php', // A PHP fájl neve
-            data: { numPrimes: numPrimes, lastDigit: lastDigit },
-            beforeSend: function () {
-                $('#loading').show(); // Megjelenítjük a betöltési üzenetet
-                $('#result-container').hide(); // Elrejtjük az eredmény téglalapot
-            },
-            success: function (data) {
-                $('#loading').hide(); // Elrejtjük a betöltési üzenetet
-                $('#result-container').show(); // Megjelenítjük az eredmény téglalapot
-                $('#result-container').html(data); // Az AJAX válaszban kapott eredményeket megjelenítjük az eredmény téglalapban
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('AJAX hiba:', errorThrown);
-            }
+                $.ajax({
+                    type: 'POST',
+                    url: 'ajax.php',
+                    data: {
+                        numPrimes: numPrimes,
+                        lastDigit: lastDigit
+                    },
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $('#loading').show();
+                        $('#result-container').hide();
+                        $('#result-container').empty();
+                    },
+                    success: function(data) {
+                        $('#loading').hide();
+                        $('#result-container').show();
+
+                        if (data.eredmenyek.length > 0) {
+                            for (var i = 0; i < data.eredmenyek.length; i++) {
+                                var eredmenyElem = $('<div class="result-number">' + data.eredmenyek[i] + '</div>');
+                                $('#result-container').append(eredmenyElem);
+                            }
+
+                            // Az eredményekre hover és click eseményfigyelők hozzáadása
+                            $('.result-number').hover(function() {
+                                $(this).css('background-color', '#FFA500'); // Hover állapotban megváltozott háttérszín
+                                $(this).css('border-color', '#FF0000'); // Hover állapotban megváltozott keretszín
+                            }, function() {
+                                $(this).css('background-color', '#33485D'); // Visszaállítjuk a háttérszínt a normál állapotra
+                                $(this).css('border-color', '#000'); // Visszaállítjuk a keretszínt a normál állapotra
+                            }).click(function() {
+                                $('.result-number').not(this).hide(); // Az összes többi eredmény elrejtése, kivéve a kattintottat
+                            });
+                        } else {
+                            $('#result-container').html('<div class="no-result-message" style="background-color: #33485D; color: #FFFFFF; padding: 10px;">Nincs eredmény a kiválasztott feltételek alapján.</div>');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log('AJAX hiba:', errorThrown);
+                    }
+                });
+            });
         });
-    });
-});
-
-</script>
-
+    </script>
 </body>
-</html>
-</body>
+
 </html>

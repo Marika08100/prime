@@ -17,12 +17,12 @@ function isPrime($n) {
     }
     return true;
 }
+$primeNumbers = array();
 
 if (isset($_POST['numPrimes']) && isset($_POST['lastDigit'])) {
     $numPrimes = intval($_POST['numPrimes']);
     $lastDigit = intval($_POST['lastDigit']);
 
-    $primeNumbers = [];
     $number = 2; // A prímek generálását 2-től kezdjük
     $primeCount = 0;
 
@@ -33,22 +33,18 @@ if (isset($_POST['numPrimes']) && isset($_POST['lastDigit'])) {
                 $primeCount++;
 
                 if ($lastDigit == 5 || $lastDigit == 2) {
-                    // Ha a kiválasztott számjegy 5 vagy páros, akkor csak páros prímszámokat keresünk
+                    // Ha a kiválasztott számjegy 5 vagy 2
                     break;
                 }
             }
             $number++;
         }
     }
+   
 
     if (empty($primeNumbers)) {
-        echo "Nincs eredmény a kiválasztott feltételek alapján.";
+        echo json_encode(array('eredmenyek' => array())); // Üres tömb visszaadása
     } else {
-        echo "A keresett prímszámok:\n";
-        foreach ($primeNumbers as $prime) {
-            echo $prime . "\n";
-        }
+        echo json_encode(array('eredmenyek' => $primeNumbers));
     }
-}
-
-?>
+    }
